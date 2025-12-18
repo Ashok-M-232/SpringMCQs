@@ -3,9 +3,11 @@ let currentQuestionIndex = 0;
 let score = 0;
 let userAnswers = [];
 let timerInterval;
+let currentSubject = null;
 
 // START QUIZ
 function startQuiz(subject) {
+    currentSubject = subject; // store current subject
     document.getElementById('cards').classList.add('hide');
     document.getElementById('setup').classList.remove('hide');
 
@@ -16,17 +18,12 @@ function startQuiz(subject) {
     else if (subject === 'springBootMicroservicesQuiz') currentQuiz = springBootMicroservicesQuiz;
     else if (subject === 'springBootSecurityQuiz') currentQuiz = springBootSecurityQuiz;
     else if (subject === 'springBootMemoryPerformanceQuiz') currentQuiz = springBootMemoryPerformanceQuiz;
-
-
-
-
-
 }
 
 // BEGIN QUIZ
 function beginQuiz() {
     const questionCount = parseInt(document.getElementById('questionSelect').value);
-    currentQuiz = currentQuiz.slice(0, questionCount);
+    currentQuiz = shuffleArray(currentQuiz).slice(0, questionCount); // randomize questions
     currentQuestionIndex = 0;
     score = 0;
     userAnswers = [];
@@ -36,6 +33,16 @@ function beginQuiz() {
 
     showQuestion();
     startTimer();
+}
+
+// SHUFFLE QUESTIONS
+function shuffleArray(array) {
+    let copy = array.slice();
+    for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
 }
 
 // SHOW QUESTION
@@ -63,18 +70,13 @@ function checkAnswer(selected) {
 
     const optionsContainer = document.querySelector('.options');
 
-    // Remove previous selection
     for (let i = 0; i < 4; i++) {
         document.getElementById(`opt${i}`).classList.remove('selected-option');
     }
 
-    // Add selected-option class
     document.getElementById(`opt${selected}`).classList.add('selected-option');
-
-    // Dim other options
     optionsContainer.classList.add('dimmed');
 
-    // Disable further clicks
     const optionButtons = optionsContainer.querySelectorAll('.option');
     optionButtons.forEach((btn) => btn.onclick = () => {});
 }
@@ -134,4 +136,31 @@ function startTimer() {
             showResult();
         }
     }, 1000);
+}
+
+// RESTART SAME QUIZ
+function restartQuiz() {
+    document.getElementById('resultScreen').classList.add('hide');
+    document.getElementById('setup').classList.remove('hide');
+    currentQuiz = [];
+    currentQuestionIndex = 0;
+    score = 0;
+    userAnswers = [];
+    clearInterval(timerInterval);
+    document.getElementById('timeSelect').value = "1";
+    document.getElementById('questionSelect').value = "10";
+
+    // start the same subject directly
+    startQuiz(currentSubject);
+}
+
+// GO TO SUBJECT SELECTION
+function goToSubjectSelection() {
+    document.getElementById('resultScreen').classList.add('hide');
+    document.getElementById('cards').classList.remove('hide');
+    currentQuiz = [];
+    currentQuestionIndex = 0;
+    score = 0;
+    userAnswers = [];
+    clearInterval(timerInterval);
 }
