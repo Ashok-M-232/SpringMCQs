@@ -1,0 +1,249 @@
+:root {
+    --primary: #6366f1;
+    --success: #16a34a;
+    --danger: #dc2626;
+    --dark: #111827;
+}
+
+/* BASE */
+* {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #eef2ff, #f0fdf4);
+}
+
+.app {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+/* HEADER */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.header h1 {
+    font-size: 42px;
+}
+
+/* CARDS */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    padding: 40px;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    transition: 0.4s;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.card.java {
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+}
+
+.card.spring {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.card:hover {
+    transform: translateY(-15px) scale(1.05);
+}
+
+/* SETUP */
+.setup {
+    max-width: 400px;
+    margin: auto;
+}
+
+.setup label {
+    display: block;
+    margin-top: 15px;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 5px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* QUIZ */
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+h2#question {
+    margin-bottom: 20px;
+}
+
+/* OPTIONS */
+.options {
+    display: grid;
+    gap: 15px;
+}
+
+.option {
+    padding: 14px;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    opacity: 1;
+    user-select: none; /* prevent blue selection */
+}
+
+/* Hover effect */
+.option:hover {
+    transform: translateX(5px);
+    border-color: var(--primary);
+}
+
+/* SELECTED OPTION */
+.option.selected-option {
+    background: var(--primary);
+    color: white;
+    border-color: var(--dark);
+    opacity: 1;
+}
+
+/* DIMMED OPTIONS */
+.options.dimmed .option:not(.selected-option) {
+    opacity: 0.5;
+    filter: blur(0.8px);
+    cursor: default;
+}
+
+/* BUTTON */
+.btn {
+    margin-top: 20px;
+    padding: 12px;
+    width: 100%;
+    border-radius: 12px;
+    border: none;
+    color: white;
+    background: var(--primary);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #4f46e5;
+}
+
+/* RESULT */
+.score-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.score-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.wave-circle {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #e0f2fe;
+}
+
+.circle-fill {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: conic-gradient(#0ea5e9 0deg, #dbeafe 0deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle-fill span {
+    position: absolute;
+    font-size: 32px;
+    font-weight: 700;
+    color: #1e3a8a;
+}
+
+.total-score {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1e3a8a;
+    text-align: center;
+}
+
+/* RESULT TABLE */
+.result-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    animation: fadeIn 0.8s ease;
+}
+
+.result-table th {
+    background: var(--dark);
+    color: white;
+    padding: 12px;
+}
+
+.result-table td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+    word-wrap: break-word;
+}
+
+.q-col {
+    font-weight: 500;
+    color: #1f2937;
+}
+
+.correct-col {
+    color: var(--success);
+    font-weight: 600;
+}
+
+.wrong-col {
+    color: var(--danger);
+    font-weight: 600;
+}
+
+.hide {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .cards {
+        grid-template-columns: 1fr;
+    }
+}

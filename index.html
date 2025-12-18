@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MCQ Practice App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div class="app">
+
+    <!-- HEADER -->
+    <header class="header">
+        <h1>MCQ Practice</h1>
+        <p>Smart Practice • Better Results</p>
+    </header>
+
+    <!-- SUBJECT CARDS -->
+    <section class="cards" id="cards">
+        <div class="card java" onclick="startQuiz('java')">
+            <h2>Java</h2>
+            <span>Core Java</span>
+        </div>
+
+        <div class="card spring" onclick="startQuiz('Core_spring')">
+            <h2>Spring Boot Core</h2>
+            <span>Framework</span>
+        </div>
+        <div class="card spring" onclick="startQuiz('springBootDataRestQuiz')">
+            <h2>Spring Boot Data REST</h2>
+            <span>Framework</span>
+        </div>
+        
+        <div class="card spring" onclick="startQuiz('springBootErrorHandlingQuiz')">
+            <h2>Spring Boot Error Handling</h2>
+            <span>Framework</span>
+        </div>
+        <div class="card spring" onclick="startQuiz('springBootMicroservicesQuiz')">
+            <h2>Spring Boot Microservices</h2>
+            <span>Framework</span>
+        </div>
+        <div class="card spring" onclick="startQuiz('springBootSecurityQuiz')">
+            <h2>Spring Boot Security</h2>
+            <span>Framework</span>
+        </div>
+        <div class="card spring" onclick="startQuiz('springBootMemoryPerformanceQuiz')">
+            <h2>Spring Boot Memory & Performance</h2>
+            <span>Framework</span>
+        </div>
+
+
+    </section>
+
+    <!-- SETUP -->
+    <section id="setup" class="setup hide">
+        <h2>Quiz Setup</h2>
+
+        <label>Time</label>
+        <select id="timeSelect">
+            <option value="1">1 Minute</option>
+            <option value="2">2 Minutes</option>
+            <option value="3">3 Minutes</option>
+            <option value="4">4 Minutes</option>
+            <option value="5">5 Minutes</option>
+        </select>
+
+        <label>Questions</label>
+        <select id="questionSelect">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
+            <option value="50">50</option>
+        </select>
+
+        <button class="btn" onclick="beginQuiz()">Start Quiz</button>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="question-box" class="quiz hide">
+        <div class="quiz-header">
+            <span id="counter">Question 1 / 10</span>
+            <span id="timer">01:00</span>
+        </div>
+
+        <h2 id="question"></h2>
+
+        <div class="options">
+            <button class="option" id="opt0" onclick="checkAnswer(0)"></button>
+            <button class="option" id="opt1" onclick="checkAnswer(1)"></button>
+            <button class="option" id="opt2" onclick="checkAnswer(2)"></button>
+            <button class="option" id="opt3" onclick="checkAnswer(3)"></button>
+        </div>
+
+        <button class="btn" onclick="nextQuestion()">Next</button>
+    </section>
+
+    <!-- RESULT -->
+    <section id="resultScreen" class="result hide">
+        <div class="score-wrapper">
+            <div class="score-container">
+                <div class="wave-circle">
+                    <div class="circle-fill">
+                        <span id="percentText">0%</span>
+                    </div>
+                </div>
+                <div id="totalScore" class="total-score"></div>
+            </div>
+        </div>
+
+        <h3>Answer Review</h3>
+
+        <table class="result-table">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Correct Answer</th>
+                    <th>Your Answer</th>
+                    <th>Explanation</th>
+                </tr>
+            </thead>
+            <tbody id="answerTable"></tbody>
+        </table>
+
+        <button class="btn" onclick="location.reload()">Restart</button>
+    </section>
+
+</div>
+
+<!-- SUBJECT DATA -->
+<script src="assets/js/subjects/java.js"></script>
+<script src="assets/js/subjects/springboot_full.js"></script> <!-- 175 questions -->
+
+<!-- MAIN LOGIC -->
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>
